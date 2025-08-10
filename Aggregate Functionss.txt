@@ -1,0 +1,72 @@
+-- Task 4: Aggregate Functions and Grouping
+
+-- 1. Apply aggregate functions (SUM, AVG, COUNT, MAX, MIN)
+
+-- Total salary of all employees
+SELECT SUM(salary) AS total_salary
+FROM employees;
+
+-- Average salary of employees
+SELECT AVG(salary) AS average_salary
+FROM employees;
+
+-- Count of employees
+SELECT COUNT(*) AS total_employees
+FROM employees;
+
+-- Minimum and Maximum salary
+SELECT MIN(salary) AS min_salary, MAX(salary) AS max_salary
+FROM employees;
+
+-- 2. GROUP BY usage
+
+-- Total salary per department
+SELECT department_id, SUM(salary) AS total_salary
+FROM employees
+GROUP BY department_id;
+
+-- Average salary per job title
+SELECT job_title, AVG(salary) AS avg_salary
+FROM employees
+GROUP BY job_title;
+
+-- 3. HAVING clause
+
+-- Departments with total salary greater than 50000
+SELECT department_id, SUM(salary) AS total_salary
+FROM employees
+GROUP BY department_id
+HAVING SUM(salary) > 50000;
+
+-- 4. COUNT(column) vs COUNT(*)
+
+-- COUNT(*) counts all rows, including NULL values
+SELECT COUNT(*) AS total_rows FROM employees;
+
+-- 5. ROUND() usage
+
+-- Round average salary to 2 decimal places
+SELECT department_id, ROUND(AVG(salary), 2) AS avg_salary
+FROM employees
+GROUP BY department_id;
+
+----------------------------------------------------------
+-- 6. Highest salary by department
+
+SELECT department_id, MAX(salary) AS highest_salary
+FROM employees
+GROUP BY department_id;
+
+----------------------------------------------------------
+-- 7. GROUP BY multiple columns
+
+SELECT department_id, job_title, COUNT(*) AS employee_count
+FROM employees
+GROUP BY department_id, job_title;
+
+----------------------------------------------------------
+-- 8. Count distinct values
+
+-- Number of distinct job titles
+SELECT COUNT(DISTINCT job_title) AS unique_jobs
+FROM employees;
